@@ -14,14 +14,16 @@ Features:
     - Generating strong passwords
 
 Usage example 1:
->>> from password_meter import Password
->>> pas = Password('Azerty22')
->>> pas.show_summary()
+
+                    >>> from password_meter import Password
+                    >>> pas = Password('Azerty22')
+                    >>> pas.show_summary()
 
 Usage example 2:
->>> from password_meter import Password
->>> pas = Password()
->>> pas.find_safe_password(6)
+
+                    >>> from password_meter import Password
+                    >>> pas = Password()
+                    >>> pas.find_safe_password(6)
 
 
 * Disclaimer:
