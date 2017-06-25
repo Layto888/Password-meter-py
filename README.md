@@ -3,15 +3,14 @@ Test the strength of your password or generate a strong one.
 
 Password Meter: github.com/Layto888/Password-meter-py
 
-Compute passwords strength and find the best password.
 Rate your password or generate a strong one.
 
 Nota bene : The program is inspired from:
 http://www.passwordmeter.com/ with different approach and proper code.
 
 Features:
-    - A simple to use API for testing the strength of your password.
-    - Generating strong passwords
+    * A simple to use API for testing the strength of your password.
+    * Generating strong passwords
 
 Usage example 1:
 
