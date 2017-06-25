@@ -28,9 +28,9 @@ Usage example 2:
 * Disclaimer:
 
 This application is designed to assess the strength of password strings.
-The instantaneous visual feedback provides the user a means to improve
-the strength of their passwords, with a hard focus on breaking the
-typical bad habits of faulty password formulation.
+And provides the user a means to improvethe strength of their passwords, 
+with a hard focus on breaking the typical bad habits of faulty password 
+formulation.
 
 Since no official weighting system exists, we created our own formulas
 to assess the overall strength of a given password.
