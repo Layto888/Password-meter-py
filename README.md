@@ -16,7 +16,7 @@ Usage example 1:
 
                     >>> from password_meter import Password
                     >>> pas = Password('Azerty22')
-                    >>> pas.show_summary()
+                    >>> pas.rate_password()
 
 Usage example 2:
 
