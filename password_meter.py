@@ -37,8 +37,7 @@ Usage example 1:
 
 Usage example 2:
 >>> from password_meter import Password
->>> pas = Password()
->>> pas.find_safe_password(6)
+>>> Password().find_safe_password(8, False)
 """
 
 import string
@@ -47,7 +46,7 @@ import logging
 from constants import *
 
 __author__ = 'A.Amine'
-__version__ = '0.1'
+__version__ = '0.2'
 
 # TODO : improve the algo of repetitive_chars() function.
 # TODO: add property's for some stuffs.
@@ -76,6 +75,36 @@ class Password(object):
         self.super_score = 0.0  # the real score - 100 %
         self.requirement_factor = 0
         self._get_infos()
+
+    def find_safe_password(self, length, display=True):
+        """ This function is to call if yo want find the best password
+        with (length l):
+        the idea is to generate MAX_TEST of passwords and find the best score.
+        return the safest password with the specified length.
+        """
+        assert length >= MIN_PASSWORD_LENGTH, 'Too short for a password.'
+
+        best_password = Password()
+
+        for _ in range(MAX_TEST):
+            new_pass = self._random_password(length)
+            new_pass._global_score()
+            if new_pass.score > best_password.score:
+                best_password = new_pass
+                if display:
+                    new_pass._show_little_summary()
+        # show the best pass found
+        if display:
+            best_password._show_summary()
+        return best_password.password
+
+    def rate_password(self):
+        """ This is the function to call if you want rate your password.
+        return: the score value.
+        """
+        self._global_score()
+        self._show_summary()
+        return self.score
 
     def __repr__(self):
         return str(self.__dict__)
@@ -115,7 +144,7 @@ class Password(object):
             self.requirement += 1
         logger.info('total self.requirement = {}'.format(self.requirement))
 
-    def middle_ns(self):
+    def _middle_ns(self):
         """ compute the flat middle numbers or symbols in string. """
         score = 0
         for i, n in enumerate(self.password):
@@ -124,7 +153,7 @@ class Password(object):
                     score += 1
         return 2 * score
 
-    def compute_addition(self):
+    def _compute_addition(self):
         """ A) addition part  """
         if self.len < MIN_LENGTH or self.requirement < MIN_REQUIREMENTS:
             self.requirement_factor = 0  # KO
@@ -134,7 +163,7 @@ class Password(object):
         # adding flat :
         self.score += (self.requirement * 2) * \
             self.requirement_factor + (self.len * 4) + (self.symbol * 6)
-        self.score += self.middle_ns()
+        self.score += self._middle_ns()
         # adding cond :
         if self.nupper:
             self.score += (self.len - self.nupper) * 2
@@ -143,21 +172,21 @@ class Password(object):
         if self.ndigit:
             self.score += self.ndigit * 4
 
-    def compute_deduction(self):
+    def _compute_deduction(self):
         """ B) compute the score of deduction part. """
-        self.score += self.only_letters()
-        self.score += self.only_digits()
-        self.score += self.repetitive_chars2()
-        self.score += self.consecutive_letter()
-        self.score += self.consecutive_digit()
-        self.score += self.check_sequential()
+        self.score += self._only_letters()
+        self.score += self._only_digits()
+        self.score += self._repetitive_chars2()
+        self.score += self._consecutive_letter()
+        self.score += self._consecutive_digit()
+        self.score += self._check_sequential()
 
-    def only_letters(self):
+    def _only_letters(self):
         if (self.nlower + self.nupper) == self.len:
             return -self.len
         return 0
 
-    def only_digits(self):
+    def _only_digits(self):
         if self.ndigit == self.len:
             return -self.len
         return 0
@@ -183,9 +212,9 @@ class Password(object):
 
     #     return -this_score
 
-    def repetitive_chars2(self):
-        """ If the number of repetition of some 'character' is >= MIN_REPCHAR
-                we add it to the negative score """
+    def _repetitive_chars2(self):
+        """ Each time the number of repetition of some 'character' is >= MIN_REPCHAR
+                we add its square to the negative score """
         cp = 0
         score = 0
         rep_array = []
@@ -207,7 +236,7 @@ class Password(object):
             score = MAX_SCORE
         return - score
 
-    def consecutive_letter(self):
+    def _consecutive_letter(self):
         """ Consecutive Uppercase letters and lower (case insensitive)
             we start the count after the 'MIN_CONSECHAR=2' consecutive
             character in the string. """
@@ -226,7 +255,7 @@ class Password(object):
                 cp = 0
         return -2 * score
 
-    def consecutive_digit(self):
+    def _consecutive_digit(self):
         """ Consecutive numbers, we start the count after the MIN_CONSEDIGIT
         Nota bene: that functions  consecutive_letter and consecutive_digit are
         computed as one score (the consecutive score value) but combined as one
@@ -247,7 +276,7 @@ class Password(object):
                 cp = 0
         return -2 * score
 
-    def check_sequential(self):
+    def _check_sequential(self):
         """ check for ascending/descending sequential Letters & digits;
         start when the counter is >= MIN_SEQUENTIAL """
         score = 0
@@ -270,25 +299,20 @@ class Password(object):
 
         return -3 * score
 
-    def global_score(self):
+    def _global_score(self):
         """
         Compute the final score = addition score A + deduction score B
         (see: functions part A / part B).
         """
-        self.compute_addition()
-        self.compute_deduction()
+        self._compute_addition()
+        self._compute_deduction()
         self.super_score = self.score - 100
         if self.score > MAX_SCORE:
             self.score = MAX_SCORE
         elif self.score < MIN_SCORE:
             self.score = MIN_SCORE
 
-    def rate_password(self):
-        """ This is the function to call if you want rate your password. """
-        self.global_score()
-        self.show_summary()
-
-    def show_little_summary(self):
+    def _show_little_summary(self):
         """ Display password and its score each time we find a new
         best password"""
         print('Best password found: {}  Global score {} %  (Ratio {}) '.format
@@ -297,7 +321,7 @@ class Password(object):
               )
 
     @staticmethod
-    def create_random_word(len):
+    def _random_password(len):
         """generate new Password instance with a random word:
         len is the length. """
         word = ''
@@ -305,27 +329,7 @@ class Password(object):
             word += random.choice(Password.test_array)
         return Password(word)
 
-    def find_safe_password(self, length, little_display=True):
-        """ This function is to call if yo want find the best password
-        with (length l):
-        the idea is to generate MAX_TEST of passwords and find the best score.
-        """
-        assert length >= MIN_PASSWORD_LENGTH, 'Too short for a password.'
-
-        best_password = Password()
-
-        for _ in range(MAX_TEST):
-            new_pass = self.create_random_word(length)
-            new_pass.global_score()
-            if new_pass.score > best_password.score:
-                best_password = new_pass
-                if little_display:
-                    new_pass.show_little_summary()
-
-        # show the best pass found
-        best_password.show_summary()
-
-    def show_summary(self):
+    def _show_summary(self):
         """ Display all stuffs about the password"""
 
         print('\n========= Summary ========= \n')
@@ -350,19 +354,19 @@ class Password(object):
 
         print('numbers: ({}) Bonus {}'.format(self.ndigit, self.ndigit * 4))
         print('symbols: ({}) Bonus {}'.format(self.symbol, self.symbol * 6))
-        print('middle num/symb bonus: {}'.format(self.middle_ns()))
+        print('middle num/symb bonus: {}'.format(self._middle_ns()))
         print('requierements: ({}/5) Bonus {}'.format
               (
                   self.requirement,
                   self.requirement * 2 * self.requirement_factor)
               )
-        print('only letters bonus: {}'.format(self.only_letters()))
-        print('only digits bonus: {}'.format(self.only_digits()))
-        print('repeat chars bonus: {}'.format(self.repetitive_chars2()))
-        print('consecutive letters: {}'.format(self.consecutive_letter()))
-        print('consecutive digits: {}'.format(self.consecutive_digit()))
+        print('only letters bonus: {}'.format(self._only_letters()))
+        print('only digits bonus: {}'.format(self._only_digits()))
+        print('repeat chars bonus: {}'.format(self._repetitive_chars2()))
+        print('consecutive letters: {}'.format(self._consecutive_letter()))
+        print('consecutive digits: {}'.format(self._consecutive_digit()))
         print('sequential (Letters/Digits/Symbols) bonus: {}'.format
               (
-                  self.check_sequential())
+                  self._check_sequential())
               )
         print('Your global score: {} %'.format(self.score))
