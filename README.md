@@ -21,8 +21,9 @@ Usage example 1:
 Usage example 2:
 
                     >>> from password_meter import Password
-                    >>> pas = Password()
-                    >>> pas.find_safe_password(6)
+                    >>> Password().find_safe_password(6)
+                    >>> Password().find_safe_password(10, False)
+                    
 
 
 * Disclaimer:
