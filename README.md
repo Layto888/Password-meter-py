@@ -45,3 +45,5 @@ improving the password creation process.
 
 TODO: 
 - rethink the check_sequential() function.
+-add test file
+-add password strength infos. 
