@@ -5,9 +5,6 @@ Password Meter: github.com/Layto888/Password-meter-py
 
 Rate your password or generate a strong one.
 
-Nota bene : The program is inspired from:
-http://www.passwordmeter.com/ with different approach and proper code.
-
 Features:
 - A simple to use API for testing the strength of your password.
 - Generating strong passwords.
