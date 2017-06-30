@@ -44,6 +44,5 @@ and should only be utilized as a loose guide in determining methods for
 improving the password creation process.
 
 TODO: 
-- rethink the check_sequential() function.
--add test file
--add password strength infos. 
+  - rethink the check_sequential() function.
+  - add password strength infos text. 
