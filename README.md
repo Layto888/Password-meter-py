@@ -43,5 +43,5 @@ improving the password creation process.
 
 TODO: 
  - [x] add unittest file
- - [ ] rethink the check_sequential() function.
+ - [ ] let user choose if he wants include : digits / symbols ..etc.
  - [ ] add password strength infos text. 
