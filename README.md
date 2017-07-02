@@ -21,7 +21,7 @@ Usage example 2:
 >>> from password_meter import Password
 >>> Password().find_safe_password(7)
 # or:
->>> my_password, my_score = pw.find_safe_password(7, display=False)
+>>> my_password, my_score = Password().find_safe_password(7, display=True)
  ```                   
 
 * Disclaimer:
