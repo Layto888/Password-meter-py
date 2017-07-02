@@ -2,7 +2,7 @@ MAX_SCORE = 100
 MIN_SCORE = 0
 MIN_CONSECHAR = 3
 MIN_CONSEDIGIT = 2
-MIN_SEQUENTIAL = 3
+MIN_SEQUENTIAL = 2
 # Minimum length of a password that represents for us a very good score
 MIN_LENGTH = 8
 # Minimum nb of digits to get the score
@@ -18,5 +18,6 @@ MIN_REPCHAR = 3
 MIN_REQUIREMENTS = 4
 
 MIN_PASSWORD_LENGTH = 4
+MAX_PASSWORD_LENGTH = 32
 
-MAX_TEST = 100000
+MAX_TEST = 50000

@@ -37,7 +37,7 @@ Usage example 1:
 
 Usage example 2:
 >>> from password_meter import Password
->>> Password().find_safe_password(8, False)
+>>> Password().find_safe_password(8)
 """
 
 import string
@@ -82,7 +82,8 @@ class Password(object):
         the idea is to generate MAX_TEST of passwords and find the best score.
         return the safest password with the specified length.
         """
-        assert length >= MIN_PASSWORD_LENGTH, 'Too short for a password.'
+        assert (length >= MIN_PASSWORD_LENGTH), 'Insufficient length for a password'
+        assert (length <= MAX_PASSWORD_LENGTH), 'Length too large for a password'
 
         best_password = Password()
 
@@ -96,7 +97,7 @@ class Password(object):
         # show the best pass found
         if display:
             best_password._show_summary()
-        return best_password.password
+        return best_password.password, best_password.score
 
     def rate_password(self):
         """ This is the function to call if you want rate your password.
@@ -234,6 +235,7 @@ class Password(object):
             score += (value * value)
         if score > MAX_SCORE:
             score = MAX_SCORE
+            score = MAX_SCORE
         return - score
 
     def _consecutive_letter(self):
@@ -258,8 +260,8 @@ class Password(object):
     def _consecutive_digit(self):
         """ Consecutive numbers, we start the count after the MIN_CONSEDIGIT
         Nota bene: that functions  consecutive_letter and consecutive_digit are
-        computed as one score (the consecutive score value) but combined as one
-        fucntion, we just split them for more reading readability of code.
+        computed as a single score (the consecutive score value), combined as one
+        fucntion, we just split them for more readability.
         """
         score = 0
         cp = 0
@@ -333,7 +335,7 @@ class Password(object):
         """ Display all stuffs about the password"""
 
         print('\n========= Summary ========= \n')
-        print('password: {} '.format(self.password))
+        print('password: {} \n'.format(self.password))
         print('length: ({}) Bonus {}'.format(self.len, self.len * 4))
 
         if self.nupper > 0:
