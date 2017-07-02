@@ -18,10 +18,10 @@ Usage example 1:
 Usage example 2:
 
                     >>> from password_meter import Password
-                    >>> Password().find_safe_password(6)
-                    >>> Password().find_safe_password(10, False)
+                    >>> Password().find_safe_password(7)
+                    # or
+                    >>> my_password, my_score = pw.find_safe_password(7, display=False)
                     
-
 
 * Disclaimer:
 
