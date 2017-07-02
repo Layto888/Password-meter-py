@@ -9,6 +9,8 @@ Features:
 - A simple to use API for testing the strength of your password.
 - Generating strong passwords.
 
+
+Usage example 1:
 ```python
 >>> from password_meter import Password
 >>> pas = Password('Azerty22')
