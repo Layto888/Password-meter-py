@@ -1,11 +1,12 @@
 # Password-meter-py
 
 * Author: Amine Amardjia.
-* Password Meter: github.com/Layto888/Password-meter-py
-  Test the strength of your password or generate a strong one.
-  Rate your password or generate a strong one.
+* Password Meter: github.com/Layto888/Password-meter-py .
+Test the strength of your password or generate a strong one.
+Rate your password or generate a strong one.
   
 * Disclaimer:
+
 This application is designed to assess the strength of password strings.
 And provides the user a means to improvethe strength of their passwords, 
 with a hard focus on breaking the typical bad habits of faulty password 
