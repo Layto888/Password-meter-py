@@ -1,5 +1,4 @@
 # Password-meter-py
-
 * Author: Amine Amardjia.
 * Password Meter: @<github.com/Layto888/Password-meter-py>
 
