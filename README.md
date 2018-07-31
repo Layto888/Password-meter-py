@@ -1,6 +1,7 @@
 # Password-meter-py
 
-By Amine Amardjia
+By Amine Amardjia.
+
 Test the strength of your password or generate a strong one.
 
 Password Meter: github.com/Layto888/Password-meter-py
