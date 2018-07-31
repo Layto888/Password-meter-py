@@ -22,7 +22,7 @@ for real-world scenarios. This application is neither perfect nor foolproof,
 and should only be utilized as a loose guide in determining methods for
 improving the password creation process
 
-* Features:
+# Features:
 - A simple to use API for testing the strength of your password.
 - Generating strong passwords.
 
