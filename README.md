@@ -1,6 +1,6 @@
 # Password-meter-py
 
-By Amine Amardjia.
+* Author: Amine Amardjia.
 
 Test the strength of your password or generate a strong one.
 
