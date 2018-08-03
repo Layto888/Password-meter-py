@@ -1,4 +1,6 @@
 language: python
+install: true
 
 python:
     - "3.6.6"
+
