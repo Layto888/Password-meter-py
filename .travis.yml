@@ -3,8 +3,9 @@ python:
   - "3.6"
   - "3.6-dev"  # 3.6 development branch
   - "3.7-dev"  # 3.7 development branch
-# command to install dependencies
+  
+# command to install dependencies (no deprendencies, skip the installation).
 install: true
 # command to run tests
 script:
-  - unittest # or py.test for Python versions 3.5 and below
+  - pytest # or py.test for Python versions 3.5 and below
