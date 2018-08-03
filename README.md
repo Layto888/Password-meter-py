@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/Layto888/Password-meter-py.svg?branch=master)](https://travis-ci.org/Layto888/Password-meter-py)
 # Password-meter-py
 * Author: Amine Amardjia.
-* Password Meter: @github.com/Layto888/Password-meter-py
+* https://github.com/Layto888/Password-meter-py
 
 Test the strength of your password or generate a strong one.
 Rate your password or generate a strong one.
