@@ -1,4 +1,4 @@
-![Build Status](https://travis-ci.org/Layto888/Password-meter-py.svg?branch=master)
+[![Build Status](https://travis-ci.org/Layto888/Password-meter-py.svg?branch=master)](https://travis-ci.org/Layto888/Password-meter-py)
 # Password-meter-py
 * Author: Amine Amardjia.
 * Password Meter: @github.com/Layto888/Password-meter-py
