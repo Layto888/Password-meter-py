@@ -16,8 +16,16 @@ MIN_REPCHAR = 3
 # If the requirement donsn't meet 4/5 of the requierements criteria,
 # PLUS + the minimum lenght of password, the score of requirement will be 0.
 MIN_REQUIREMENTS = 4
-
 MIN_PASSWORD_LENGTH = 4
 MAX_PASSWORD_LENGTH = 32
-
 MAX_TEST = 50000
+
+# Spec: constant to let user choose what he want include or exclude.
+ALL = 0
+ONLY_LETTERS = 5
+ONLY_DIGITS = 7
+ONLY_PUNCTATIONS = 8
+# (same as calling ONLY_LETTERS + ONLY_DIGITS)
+LETTERS_DIGITS = 12
+LETTERS_PONCTUATIONS = 13
+DIGITS_PONCTUATIONS = 15

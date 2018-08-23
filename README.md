@@ -39,11 +39,12 @@ Usage example 1:
 Usage example 2:
 ```python
 >>> from password_meter import Password
->>> Password().find_safe_password(7)
+>>> from constants import *
+>>> Password().find_safe_password(8, display=True, spec=ONLY_PUNCTATIONS+ONLY_DIGITS)
 # or:
->>> my_password, my_score = Password().find_safe_password(7, display=False)
- ```                  
+>>> my_password, my_score = Password().find_safe_password(8, display=True)
+ ```
 TODO: 
  - [x] add unittest file
- - [ ] let user choose if he wants include : digits / symbols ..etc.
- - [ ] add password strength infos text. 
+ - [x] let user choose if he wants include : digits / symbols ..etc.
+ - [x] add password strength infos text. 

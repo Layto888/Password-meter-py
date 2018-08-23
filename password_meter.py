@@ -37,7 +37,8 @@ Usage example 1:
 
 Usage example 2:
 >>> from password_meter import Password
->>> Password().find_safe_password(8)
+>>> from constants import *
+>>> Password().find_safe_password(8, display=True, spec=ONLY_PUNCTATIONS+ONLY_DIGITS)
 """
 
 import string
@@ -46,13 +47,11 @@ import logging
 from constants import *
 
 __author__ = 'A.Amine'
-__version__ = '0.2'
-
-# TODO : improve the algo of repetitive_chars() function.
-# TODO: add property's for some stuffs.
+__version__ = '0.3'
 
 logger = logging.getLogger('password')
 logging.basicConfig(level=logging.WARNING)
+
 
 
 class Password(object):
@@ -60,7 +59,11 @@ class Password(object):
 
     # test array avoid including string.whitespace when generating random
     # passwords.
-    test_array = string.ascii_letters + string.punctuation + string.digits
+    str_array = string.ascii_letters
+    pnc_array = string.punctuation
+    dgt_array = string.digits
+    global_array = str_array + pnc_array + dgt_array
+    
 
     def __init__(self, password=''):
 
@@ -76,11 +79,12 @@ class Password(object):
         self.requirement_factor = 0
         self._get_infos()
 
-    def find_safe_password(self, length, display=True):
+    def find_safe_password(self, length, display=True, spec=ALL):
         """ This function is to call if yo want find the best password
         with (length l):
         the idea is to generate MAX_TEST of passwords and find the best score.
         return the safest password with the specified length.
+        use spec to specify if you want to includes: letters, digits, symbols.
         """
         assert (length >= MIN_PASSWORD_LENGTH), 'Insufficient length for a password'
         assert (length <= MAX_PASSWORD_LENGTH), 'Length too large for a password'
@@ -88,7 +92,7 @@ class Password(object):
         best_password = Password()
 
         for _ in range(MAX_TEST):
-            new_pass = self._random_password(length)
+            new_pass = self._random_password(length, spec)
             new_pass._global_score()
             if new_pass.score > best_password.score:
                 best_password = new_pass
@@ -192,7 +196,7 @@ class Password(object):
             return -self.len
         return 0
 
-    # def repetitive_chars(self):
+    # def repetitive_chars1(self):
     #     """ If the number of repetition of some 'character' is >= MIN_REPCHAR
     #             we add it to the negative score. """
     #     this_score = 0
@@ -323,12 +327,28 @@ class Password(object):
               )
 
     @staticmethod
-    def _random_password(len):
+    def _random_password(len, spec=ALL):
         """generate new Password instance with a random word:
-        len is the length. """
+        len is the length. 
+        """
+        if spec == ALL:
+            list_char = Password.global_array
+        elif spec == ONLY_LETTERS:
+            list_char = Password.str_array
+        elif spec == ONLY_DIGITS:
+            list_char = Password.dgt_array
+        elif spec == ONLY_PUNCTATIONS:
+            list_char = Password.pnc_array
+        elif spec == LETTERS_DIGITS:
+            list_char = Password.str_array + Password.dgt_array
+        elif spec == LETTERS_PONCTUATIONS:
+            list_char = Password.str_array + Password.pnc_array
+        elif spec == DIGITS_PONCTUATIONS:
+            list_char = Password.pnc_array + Password.dgt_array
+
         word = ''
         for _ in range(len):
-            word += random.choice(Password.test_array)
+            word += random.choice(list_char)
         return Password(word)
 
     def _show_summary(self):
