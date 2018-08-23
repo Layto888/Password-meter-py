@@ -42,8 +42,10 @@ Usage example 2:
 >>> from constants import *
 >>> Password().find_safe_password(8, display=True, spec=ONLY_PUNCTATIONS+ONLY_DIGITS)
 # or:
->>> my_password, my_score = Password().find_safe_password(8, display=True)
- ```
+>>> my_password, my_score = Password().find_safe_password(8, display=False)
+# or:
+>>> Password().find_safe_password(8)
+```
 TODO: 
  - [x] add unittest file
  - [x] let user choose if he wants include : digits / symbols ..etc.
