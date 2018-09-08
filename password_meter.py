@@ -28,6 +28,7 @@ http://www.passwordmeter.com/ with different approach and proper code.
 Features:
     - A simple to use API for testing the strength of your password.
     - Generating strong passwords
+    - suggest improvement
 
 
 Usage example 1:
