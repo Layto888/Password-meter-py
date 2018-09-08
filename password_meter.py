@@ -208,26 +208,6 @@ class Password(object):
             return -self.len
         return 0
 
-    # def repetitive_chars1(self):
-    #     """ If the number of repetition of some 'character' is >= MIN_REPCHAR
-    #             we add it to the negative score. """
-    #     this_score = 0
-    #     occurence = set(self.password)
-
-    #     for letter in occurence:
-    #         x = self.password.count(letter)
-
-    #         if x >= MIN_REPCHAR:
-    #             this_score += (x ** 2)
-    #             logger.debug(
-
-    #                 'letter {} repeated {} x**2 = {}'.format(letter, x, x**2)
-    #             )
-    #         else:
-    #             this_score -= (x * 2)
-    #             x = 0
-
-    #     return -this_score
 
     def _repetitive_chars2(self):
         """ Each time the number of repetition of some 'character' is >= MIN_REPCHAR
