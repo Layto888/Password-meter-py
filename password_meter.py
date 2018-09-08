@@ -79,7 +79,7 @@ class Password(object):
         self.requirement_factor = 0
         self._get_infos()
 
-    def find_safe_password(self, length, display=True, spec=ALL):
+    def find_safe_password(self, length, display=False, spec=ALL):
         """ This function is to call if yo want find the best password
         with (length l):
         the idea is to generate MAX_TEST of passwords and find the best score.
@@ -104,12 +104,24 @@ class Password(object):
         return best_password.password, best_password.score
 
     def rate_password(self):
-        """ This is the function to call if you want rate your password.
+        """ 
+        This is the function to call if you want rate your password.
         return: the score value.
         """
         self._global_score()
         self._show_summary()
+        self._suggest_improvement()
         return self.score
+
+    def _suggest_improvement(self):
+        """
+        If the score is under 50%,it will be considererd 'weak'
+        suggest then some improvement depending on the original password letters.
+        """
+        if self.score < 50.0:
+            additional_part, score = self.find_safe_password(MIN_LENGTH - 2, spec=ONLY_DIGITS+ONLY_PUNCTATIONS) 
+            improved_password = self.password + additional_part 
+            print('\nYour password is pretty weak, we suggest: {}'.format(improved_password))
 
     def __repr__(self):
         return str(self.__dict__)
