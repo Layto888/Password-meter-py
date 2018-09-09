@@ -33,16 +33,16 @@ improving the password creation process
 Usage example 1:
 ```python
 >>> from password_meter import Password
->>> pas = Password('Azerty22')
->>> pas.rate_password()
+>>> password = Password('Azerty22')
+>>> password.rate()
 ```
 Usage example 2:
 ```python
 >>> from password_meter import Password
 >>> from constants import *
->>> Password().find_safe_password(8, display=True, spec=ONLY_PUNCTATIONS+ONLY_DIGITS)
+>>> Password().find(8, display=True, spec=ONLY_PUNCTATIONS+ONLY_DIGITS)
 # or:
->>> my_password, my_score = Password().find_safe_password(8, display=True)
+>>> my_password, my_score = Password().find(8)
  ```
 TODO: 
  - [x] add unittest file

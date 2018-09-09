@@ -1,7 +1,5 @@
 """
-Password Meter:
-
-github.com/Layto888/Password-meter-py
+Password Meter: github.com/Layto888/Password-meter-py
 
 Compute passwords strength and find the best password.
 Rate your password or generate a strong one.
@@ -22,24 +20,24 @@ for real-world scenarios. This application is neither perfect nor foolproof,
 and should only be utilized as a loose guide in determining methods for
 improving the password creation process.
 
-Nota bene : The program is inspired from :
+Nota bene: The program is inspired from :
 http://www.passwordmeter.com/ with different approach and proper code.
 
 Features:
     - A simple to use API for testing the strength of your password.
     - Generating strong passwords
-    - suggest improvement
+    - suggest improvement in case of weak password.
 
 
 Usage example 1:
 >>> from password_meter import Password
->>> pas = Password('Azerty22')
->>> pas.rate_password()
+>>> password = Password('Azerty22')
+>>> password.rate()
 
 Usage example 2:
 >>> from password_meter import Password
->>> from constants import *
->>> Password().find_safe_password(8, display=True, spec=ONLY_PUNCTATIONS+ONLY_DIGITS)
+>>> from constants import * 
+>>> Password().find(8, display=True, spec=ONLY_PUNCTATIONS+ONLY_DIGITS)
 """
 
 import string
@@ -48,11 +46,10 @@ import logging
 from constants import *
 
 __author__ = 'A.Amine'
-__version__ = '0.3'
+__version__ = '0.4'
 
 logger = logging.getLogger('password')
 logging.basicConfig(level=logging.WARNING)
-
 
 
 class Password(object):
@@ -80,15 +77,19 @@ class Password(object):
         self.requirement_factor = 0
         self._get_infos()
 
-    def find_safe_password(self, length, display=False, spec=ALL):
+    def find(self, length, display=False, spec=ALL):
         """ This function is to call if yo want find the best password
         with (length l):
         the idea is to generate MAX_TEST of passwords and find the best score.
-        return the safest password with the specified length.
+        return the safest password.
         use spec to specify if you want to includes: letters, digits, symbols.
         """
         assert (length >= MIN_PASSWORD_LENGTH), 'Insufficient length for a password'
         assert (length <= MAX_PASSWORD_LENGTH), 'Length too large for a password'
+        # check for spec
+        if spec > ALL:
+            logger.error('This specification isnot allowed. default spec=ALL')
+            spec = ALL
 
         best_password = Password()
 
@@ -104,7 +105,7 @@ class Password(object):
             best_password._show_summary()
         return best_password.password, best_password.score
 
-    def rate_password(self):
+    def rate(self):
         """ 
         This is the function to call if you want rate your password.
         return: the score value.
@@ -120,7 +121,7 @@ class Password(object):
         suggest then some improvement depending on the original password letters.
         """
         if self.score < 50.0:
-            additional_part, score = self.find_safe_password(MIN_LENGTH - 2, spec=ONLY_DIGITS+ONLY_PUNCTATIONS) 
+            additional_part, score = self.find(MIN_LENGTH - 2, spec=ONLY_DIGITS+ONLY_PUNCTATIONS) 
             improved_password = self.password + additional_part 
             print('\nYour password is pretty weak, we suggest: {}'.format(improved_password))
 
