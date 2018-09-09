@@ -41,7 +41,7 @@ Usage example 2:
 >>> from password_meter import Password
 >>> from constants import *
 >>> Password().find(8, display=True, spec=ONLY_PUNCTATIONS+ONLY_DIGITS)
-# or:
+# or this will return a new safe password and its score:
 >>> my_password, my_score = Password().find(8)
  ```
 TODO: 
