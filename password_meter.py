@@ -1,5 +1,5 @@
 """
-Password Meter: github.com/Layto888/Password-meter-py
+Password Meter:github.com/Layto888/Password-meter-py
 
 Compute passwords strength and find the best password.
 Rate your password or generate a strong one.
