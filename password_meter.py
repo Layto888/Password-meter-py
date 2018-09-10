@@ -87,8 +87,9 @@ class Password(object):
         assert (length >= MIN_PASSWORD_LENGTH), 'Insufficient length for a password'
         assert (length <= MAX_PASSWORD_LENGTH), 'Length too large for a password'
         # check for spec
+        new_spec = spec
         if spec > ALL:
-            logger.error('This specification isnot allowed. default spec=ALL')
+            logger.error('\nThis specification is not allowed. -> set spec to default.\n')
             spec = ALL
 
         best_password = Password()
@@ -117,10 +118,10 @@ class Password(object):
 
     def _suggest_improvement(self):
         """
-        If the score is under 50%,it will be considererd 'weak'
+        If the score is under 50% it will be considered 'weak'
         suggest then some improvement depending on the original password letters.
         """
-        if self.score < 50.0:
+        if self.score < MAX_SCORE / 2.0:
             additional_part, score = self.find(MIN_LENGTH - 2, spec=ONLY_DIGITS+ONLY_PUNCTATIONS) 
             improved_password = self.password + additional_part 
             print('\nYour password is pretty weak, we suggest: {}'.format(improved_password))
@@ -333,11 +334,11 @@ class Password(object):
             list_char = Password.dgt_array
         elif spec == ONLY_PUNCTATIONS:
             list_char = Password.pnc_array
-        elif spec == LETTERS_DIGITS:
+        elif spec == ONLY_LETTERS + ONLY_DIGITS:
             list_char = Password.str_array + Password.dgt_array
-        elif spec == LETTERS_PONCTUATIONS:
+        elif spec == ONLY_LETTERS + ONLY_PUNCTATIONS:
             list_char = Password.str_array + Password.pnc_array
-        elif spec == DIGITS_PONCTUATIONS:
+        elif spec == ONLY_DIGITS + ONLY_PUNCTATIONS:
             list_char = Password.pnc_array + Password.dgt_array
 
         word = ''

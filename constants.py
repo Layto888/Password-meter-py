@@ -1,4 +1,3 @@
-
 MAX_SCORE = 100
 MIN_SCORE = 0
 MIN_CONSECHAR = 3
@@ -22,11 +21,8 @@ MAX_PASSWORD_LENGTH = 32
 MAX_TEST = 50000
 
 # Spec: constant to let user choose what he want include or exclude.
-ALL = 0
+ALL = 20
 ONLY_LETTERS = 5
 ONLY_DIGITS = 7
 ONLY_PUNCTATIONS = 8
-# (same as calling ONLY_LETTERS + ONLY_DIGITS)
-LETTERS_DIGITS = 12
-LETTERS_PONCTUATIONS = 13
-DIGITS_PONCTUATIONS = 15
+
