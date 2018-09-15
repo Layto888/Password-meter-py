@@ -36,7 +36,7 @@ Usage example 1:
 
 Usage example 2:
 >>> from password_meter import Password
->>> from constants import * 
+>>> from constants import *
 >>> Password().find(8, display=True, spec=ONLY_PUNCTATIONS+ONLY_DIGITS)
 """
 
@@ -165,9 +165,9 @@ class Password(object):
     def _middle_ns(self):
         """ compute the flat middle numbers or symbols in string. """
         score = 0
-        for i, n in enumerate(self.password):
+        for i, j in enumerate(self.password):
             if i > 0 and i < self.len - 1:
-                if n.isdigit() or n in string.punctuation:
+                if j.isdigit() or j in string.punctuation:
                     score += 1
         return 2 * score
 
@@ -212,21 +212,21 @@ class Password(object):
     def _repetitive_chars2(self):
         """ Each time the number of repetition of some 'character' is >= MIN_REPCHAR
                 we add its square to the negative score """
-        cp = 0
+        counter = 0
         score = 0
         rep_array = []
 
         for i in range(0, self.len - 1):
             # check for ascending sequential characters & numbers
             if self.password[i] == self.password[i + 1]:
-                cp += 1
+                counter += 1
             else:
-                if cp >= MIN_REPCHAR:
-                    rep_array.append(cp)
-                    logger.info('add to rep_array: {}'.format(cp))
-                    cp = 0
+                if counter >= MIN_REPCHAR:
+                    rep_array.append(counter)
+                    logger.info('add to rep_array: {}'.format(counter))
+                    counter = 0
 
-        rep_array.append(cp)
+        rep_array.append(counter)
         for value in rep_array:
             score += (value * value)
         if score > MAX_SCORE:
@@ -239,18 +239,17 @@ class Password(object):
             we start the count after the 'MIN_CONSECHAR=2' consecutive
             character in the string. """
         score = 0
-        cp = 0
+        counter = 0
         for letter in self.password:
             if letter.isalpha():
-                cp += 1
-                if cp >= MIN_CONSECHAR:
+                counter += 1
+                if counter >= MIN_CONSECHAR:
                     score += 1
                     logger.info('consec letter {}:{} time >= {} '.format
-                                (
-                                    score, cp, MIN_CONSECHAR)
-                                )
+                                (score, counter, MIN_CONSECHAR))
+
             else:
-                cp = 0
+                counter = 0
         return -2 * score
 
     def _consecutive_digit(self):
@@ -260,40 +259,39 @@ class Password(object):
         fucntion, we just split them for more readability.
         """
         score = 0
-        cp = 0
+        counter = 0
         for letter in self.password:
             if letter.isdigit():
-                cp += 1
-                if cp >= MIN_CONSEDIGIT:
+                counter += 1
+                if counter >= MIN_CONSEDIGIT:
                     score += 1
                     logger.info('consec digit {} time >= {} '.format
-                                (
-                                    cp, MIN_CONSECHAR)
-                                )
+                                (counter, MIN_CONSECHAR))
+
             else:
-                cp = 0
+                counter = 0
         return -2 * score
 
     def _check_sequential(self):
         """ check for ascending/descending sequential Letters & digits;
         start when the counter is >= MIN_SEQUENTIAL """
         score = 0
-        cp_asc_seq = cp_des_seq = 0
+        counter_asc_seq = counter_des_seq = 0
 
         for i in range(0, self.len - 1):
             # check for ascending sequential characters & numbers
             if ord(self.password[i]) + 1 == ord(self.password[i + 1]):
-                cp_asc_seq += 1
-                if cp_asc_seq >= MIN_SEQUENTIAL:
+                counter_asc_seq += 1
+                if counter_asc_seq >= MIN_SEQUENTIAL:
                     score += 1
 
             # check for descending sequential characters & numbers
             elif ord(self.password[i]) == ord(self.password[i + 1]) + 1:
-                cp_des_seq += 1
-                if cp_des_seq >= MIN_SEQUENTIAL:
+                counter_des_seq += 1
+                if counter_des_seq >= MIN_SEQUENTIAL:
                     score += 1
             else:
-                cp_asc_seq = cp_des_seq = 0
+                counter_asc_seq = counter_des_seq = 0
 
         return -3 * score
 
@@ -319,7 +317,7 @@ class Password(object):
               )
 
     @staticmethod
-    def _random_password(len, spec=ALL):
+    def _random_password(length, spec=ALL):
         """generate new Password instance with a random word:
         len is the length.
         """
@@ -339,7 +337,7 @@ class Password(object):
             list_char = Password.pnc_array + Password.dgt_array
 
         word = ''
-        for _ in range(len):
+        for _ in range(length):
             word += random.choice(list_char)
         return Password(word)
 
