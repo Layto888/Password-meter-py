@@ -61,7 +61,6 @@ class Password(object):
     pnc_array = string.punctuation
     dgt_array = string.digits
     global_array = str_array + pnc_array + dgt_array
-    
 
     def __init__(self, password=''):
 
@@ -87,7 +86,6 @@ class Password(object):
         assert (length >= MIN_PASSWORD_LENGTH), 'Insufficient length for a password'
         assert (length <= MAX_PASSWORD_LENGTH), 'Length too large for a password'
         # check for spec
-        new_spec = spec
         if spec > ALL:
             logger.error('\nThis specification is not allowed. -> set spec to default.\n')
             spec = ALL
@@ -107,7 +105,7 @@ class Password(object):
         return best_password.password, best_password.score
 
     def rate(self):
-        """ 
+        """
         This is the function to call if you want rate your password.
         return: the score value.
         """
@@ -122,8 +120,8 @@ class Password(object):
         suggest then some improvement depending on the original password letters.
         """
         if self.score < MAX_SCORE / 2.0:
-            additional_part, score = self.find(MIN_LENGTH - 2, spec=ONLY_DIGITS+ONLY_PUNCTATIONS) 
-            improved_password = self.password + additional_part 
+            additional_part, score = self.find(MIN_LENGTH - 2, spec=ONLY_DIGITS + ONLY_PUNCTATIONS)
+            improved_password = self.password + additional_part
             print('\nYour password is pretty weak, we suggest: {}'.format(improved_password))
 
     def __repr__(self):
@@ -210,7 +208,6 @@ class Password(object):
         if self.ndigit == self.len:
             return -self.len
         return 0
-
 
     def _repetitive_chars2(self):
         """ Each time the number of repetition of some 'character' is >= MIN_REPCHAR
@@ -324,7 +321,7 @@ class Password(object):
     @staticmethod
     def _random_password(len, spec=ALL):
         """generate new Password instance with a random word:
-        len is the length. 
+        len is the length.
         """
         if spec == ALL:
             list_char = Password.global_array
