@@ -1,2 +1,5 @@
 *.pyc
 test.py
+unittest_test_.py
+.pytest_cache
+
