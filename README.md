@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/Layto888/Password-meter-py.svg?branch=master)](https://travis-ci.org/Layto888/Password-meter-py)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 # Password-meter-py
 * Author: Amine Amardjia.
 * https://github.com/Layto888/Password-meter-py
