@@ -87,7 +87,8 @@ class Password(object):
         assert (length <= MAX_PASSWORD_LENGTH), 'Length too large for a password'
         # check for spec
         if spec > ALL:
-            logger.error('\nThis specification is not allowed. -> set spec to default.\n')
+            logger.error(
+                '\nThis specification is not allowed. -> set spec to default.\n')
             spec = ALL
 
         best_password = Password()
@@ -120,9 +121,11 @@ class Password(object):
         suggest then some improvement depending on the original password letters.
         """
         if self.score < MAX_SCORE / 2.0:
-            additional_part, score = self.find(MIN_LENGTH - 2, spec=ONLY_DIGITS + ONLY_PUNCTATIONS)
+            additional_part, score = self.find(
+                MIN_LENGTH - 2, spec=ONLY_DIGITS + ONLY_PUNCTATIONS)
             improved_password = self.password + additional_part
-            print('\nYour password is pretty weak, we suggest: {}'.format(improved_password))
+            print('\nYour password is pretty weak, we suggest: {}'.format(
+                improved_password))
 
     def __repr__(self):
         return str(self.__dict__)
@@ -342,7 +345,7 @@ class Password(object):
         return Password(word)
 
     def _show_summary(self):
-        """ Display all stuffs about the password"""
+        """ Display all stuffs about the password """
 
         print('\n========= Summary ========= \n')
         print('password: {} \n'.format(self.password))
