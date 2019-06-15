@@ -47,7 +47,7 @@ def test_check_sequential(password):
 
 def test_global_score(password):
     password._global_score()
-    assert password.score == 100
+    assert password.score >= 100.0
 
 
 # test specifications types

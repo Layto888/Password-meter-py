@@ -44,6 +44,8 @@ import string
 import random
 import logging
 from constants import *
+from matplotlib import pyplot as plt
+
 
 __author__ = 'A.Amine'
 __version__ = '0.4'
@@ -76,6 +78,10 @@ class Password(object):
         self.requirement_factor = 0
         self._get_infos()
 
+        # For drawings list of scores / passowrds length.
+        self.scores_list = []
+        self.tentatives_counter = []
+
     def find(self, length, display=False, spec=ALL):
         """ This function is to call if yo want find the best password
         with (length l):
@@ -85,6 +91,8 @@ class Password(object):
         """
         assert (length >= MIN_PASSWORD_LENGTH), 'Insufficient length for a password'
         assert (length <= MAX_PASSWORD_LENGTH), 'Length too large for a password'
+        # tentatives counter
+        ten_counter = 1
         # check for spec
         if spec > ALL:
             logger.error(
@@ -96,13 +104,29 @@ class Password(object):
         for _ in range(MAX_TEST):
             new_pass = self._random_password(length, spec)
             new_pass._global_score()
+
             if new_pass.score > best_password.score:
                 best_password = new_pass
+                # set drawable list
+                self.scores_list.append(new_pass.score)
+                self.tentatives_counter.append(ten_counter)
+
                 if display:
                     new_pass._show_little_summary()
+
+            ten_counter += 1
         # show the best pass found
         if display:
             best_password._show_summary()
+            plt.plot(self.scores_list, self.tentatives_counter, label='password complexity', marker='.')
+
+            plt.xlabel('Score(%)')
+            plt.ylabel('Number of tests')
+            plt.title('Password complexity evolution')
+            plt.suptitle('Evolution of passwords score according to the generated passwords.')
+            plt.legend()
+            plt.grid()
+            plt.show()
         return best_password.password, best_password.score
 
     def rate(self):
@@ -306,10 +330,10 @@ class Password(object):
         self._compute_addition()
         self._compute_deduction()
         self.super_score = self.score - 100
-        if self.score > MAX_SCORE:
-            self.score = MAX_SCORE
-        elif self.score < MIN_SCORE:
-            self.score = MIN_SCORE
+        # if self.score > MAX_SCORE:
+        #    self.score = MAX_SCORE
+        # elif self.score < MIN_SCORE:
+        #    self.score = MIN_SCORE
 
     def _show_little_summary(self):
         """ Display password and its score each time we find a new

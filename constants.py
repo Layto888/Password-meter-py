@@ -4,7 +4,7 @@ MIN_CONSECHAR = 3
 MIN_CONSEDIGIT = 2
 MIN_SEQUENTIAL = 2
 # Minimum length of a password that represents for us a very good score
-MIN_LENGTH = 8
+MIN_LENGTH = 10
 # Minimum nb of digits to get the score
 MIN_DIGITS = 1
 # the min values of lower & upper characters in the password
