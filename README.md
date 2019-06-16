@@ -45,7 +45,7 @@ Usage example 2:
 # or this will return a new safe password and its score:
 >>> my_password, my_score = Password().find(8)
  ```
- ![alt text](https://github.com/Layto888/Password-meter-py/blob/master/ppp.png)
+ ![alt text](https://github.com/Layto888/Password-meter-py/blob/master/pppo.png)
  
 TODO: 
  - [x] add unittest file
