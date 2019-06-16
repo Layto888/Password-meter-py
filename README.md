@@ -53,7 +53,7 @@ Usage example 2:
 >>> from password_meter import Password
 >>> from constants import *
 >>> from matplotlib import pyplot as plt
->>> # find best password algorithme 
+>>> # find best password algorithm
 >>> Password().find(12, display=True, spec=ALL, msg='spec=ALL')
 >>> Password().find(12, display=True, spec=ONLY_LETTERS + ONLY_DIGITS, msg='spec=LETTERS + DIGITS')       
 >>> Password().find(12, display=True, spec=ONLY_LETTERS + ONLY_PUNCTATIONS, msg='spec=LETTERS + PUNCTATIONS')
