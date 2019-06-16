@@ -47,6 +47,27 @@ Usage example 2:
  ```
  ![alt text](https://github.com/Layto888/Password-meter-py/blob/master/pppo.png)
  
+ Code for representation:
+ 
+```python
+>>> from password_meter import Password
+>>> from constants import *
+>>> from matplotlib import pyplot as plt
+>>> 
+>>> Password().find(12, display=True, spec=ALL, msg='spec=ALL')
+>>> Password().find(12, display=True, spec=ONLY_LETTERS + ONLY_DIGITS, msg='spec=LETTERS + DIGITS')       
+>>> Password().find(12, display=True, spec=ONLY_LETTERS + ONLY_PUNCTATIONS, msg='spec=LETTERS + PUNCTATIONS')
+>>> Password().find(12, display=True, spec=ONLY_DIGITS + ONLY_PUNCTATIONS, msg='spec=DIGITS + PUNCTATIONS')
+>>> 
+>>> plt.xlabel('Number of tests')
+>>> plt.ylabel('Score (Password Strength)')
+>>> plt.title('Password complexity evolution')
+>>> plt.suptitle('Evolution of passwords score according to the generated passwords.')
+>>> plt.legend()
+>>> plt.grid()
+>>> plt.show()
+```
+ 
 TODO: 
  - [x] add unittest file
  - [x] let user choose if he wants include : digits / symbols ..etc.
