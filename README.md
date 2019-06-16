@@ -47,7 +47,7 @@ Usage example 2:
  ```
  ![alt text](https://github.com/Layto888/Password-meter-py/blob/master/pppo.png)
  
- Code for representation:
+ Code used for representation:
  
 ```python
 >>> from password_meter import Password
