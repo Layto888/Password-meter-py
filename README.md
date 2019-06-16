@@ -45,6 +45,8 @@ Usage example 2:
 # or this will return a new safe password and its score:
 >>> my_password, my_score = Password().find(8)
  ```
+ 
+ # TEST:
  ![alt text](https://github.com/Layto888/Password-meter-py/blob/master/pppo.png)
  
  Code used for representation:
