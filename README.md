@@ -53,12 +53,12 @@ Usage example 2:
 >>> from password_meter import Password
 >>> from constants import *
 >>> from matplotlib import pyplot as plt
->>> 
+>>> # set 
 >>> Password().find(12, display=True, spec=ALL, msg='spec=ALL')
 >>> Password().find(12, display=True, spec=ONLY_LETTERS + ONLY_DIGITS, msg='spec=LETTERS + DIGITS')       
 >>> Password().find(12, display=True, spec=ONLY_LETTERS + ONLY_PUNCTATIONS, msg='spec=LETTERS + PUNCTATIONS')
 >>> Password().find(12, display=True, spec=ONLY_DIGITS + ONLY_PUNCTATIONS, msg='spec=DIGITS + PUNCTATIONS')
->>> 
+>>> # draw graph
 >>> plt.xlabel('Number of tests')
 >>> plt.ylabel('Score (Password Strength)')
 >>> plt.title('Password complexity evolution')
