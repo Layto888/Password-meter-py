@@ -56,10 +56,10 @@ Usage example 2:
 >>> from constants import *
 >>> from matplotlib import pyplot as plt
 >>> # find best password algorithm
->>> Password().find(12, display=True, spec=ALL, msg='spec=ALL')
->>> Password().find(12, display=True, spec=ONLY_LETTERS + ONLY_DIGITS, msg='spec=LETTERS + DIGITS')       
->>> Password().find(12, display=True, spec=ONLY_LETTERS + ONLY_PUNCTATIONS, msg='spec=LETTERS + PUNCTATIONS')
->>> Password().find(12, display=True, spec=ONLY_DIGITS + ONLY_PUNCTATIONS, msg='spec=DIGITS + PUNCTATIONS')
+>>> Password().find(12, spec=ALL, msg='spec=ALL')
+>>> Password().find(12, spec=USE_LETTERS+USE_DIGITS, msg='spec=LETTERS + DIGITS')
+>>> Password().find(12, spec=USE_LETTERS+USE_PUNCTATIONS, msg='spec=LETTERS + PUNCTATIONS')
+>>> Password().find(12, spec=USE_DIGITS+USE_PUNCTATIONS, msg='spec=DIGITS + PUNCTATIONS')
 >>> # draw graph
 >>> plt.xlabel('Number of tests')
 >>> plt.ylabel('Score (Password Strength)')

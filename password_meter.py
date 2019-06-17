@@ -48,7 +48,7 @@ from matplotlib import pyplot as plt
 
 
 __author__ = 'A.Amine'
-__version__ = '0.4'
+__version__ = '0.5'
 
 logger = logging.getLogger('password')
 logging.basicConfig(level=logging.WARNING)
@@ -82,7 +82,7 @@ class Password(object):
         self.scores_list = []
         self.tentatives_counter = []
 
-    def find(self, length, display=False, spec=ALL):
+    def find(self, length, display=True, spec=ALL, msg=''):
         """ This function is to call if yo want find the best password
         with (length l):
         the idea is to generate MAX_TEST of passwords and find the best score.
@@ -92,9 +92,9 @@ class Password(object):
         assert (length >= MIN_PASSWORD_LENGTH), 'Insufficient length for a password'
         assert (length <= MAX_PASSWORD_LENGTH), 'Length too large for a password'
         # tentatives counter
-        ten_counter = 1
+        test_counter = 1
         # check for spec
-        if spec > ALL:
+        if spec > ALL or spec < ONLY_LETTERS:
             logger.error(
                 '\nThis specification is not allowed. -> set spec to default.\n')
             spec = ALL
@@ -109,24 +109,17 @@ class Password(object):
                 best_password = new_pass
                 # set drawable list
                 self.scores_list.append(new_pass.score)
-                self.tentatives_counter.append(ten_counter)
+                self.tentatives_counter.append(test_counter)
 
                 if display:
                     new_pass._show_little_summary()
 
-            ten_counter += 1
+            test_counter += 1
         # show the best pass found
         if display:
             best_password._show_summary()
-            plt.plot(self.scores_list, self.tentatives_counter, label='password complexity', marker='.')
+            plt.plot(self.tentatives_counter, self.scores_list, label=msg, marker='.')
 
-            plt.xlabel('Score(%)')
-            plt.ylabel('Number of tests')
-            plt.title('Password complexity evolution')
-            plt.suptitle('Evolution of passwords score according to the generated passwords.')
-            plt.legend()
-            plt.grid()
-            plt.show()
         return best_password.password, best_password.score
 
     def rate(self):

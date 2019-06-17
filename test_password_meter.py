@@ -2,8 +2,9 @@ import pytest
 from password_meter import Password
 from constants import ALL, ONLY_LETTERS, ONLY_DIGITS, ONLY_PUNCTATIONS
 
-
 # set up fixture
+
+
 @pytest.fixture(scope='module')
 def password():
     pswd = Password(':abcdX01J!b#')
