@@ -1,6 +1,6 @@
 import pytest
 from password_meter import Password
-from constants import ALL, ONLY_LETTERS, ONLY_DIGITS, ONLY_PUNCTATIONS
+from constants import ALL, USE_LETTERS, USE_DIGITS, USE_PUNCTATIONS
 
 # set up fixture
 
@@ -53,13 +53,13 @@ def test_global_score(password):
 
 # test specifications types
 def test_random_password_spec(password):
-    assert ALL == ONLY_LETTERS + ONLY_DIGITS + ONLY_PUNCTATIONS
+    assert ALL == USE_LETTERS + USE_DIGITS + USE_PUNCTATIONS
     # new find safe password test with cases:
-    passwd, score = Password().find(8, spec=ONLY_DIGITS)
+    passwd, score = Password().find(8, spec=USE_DIGITS)
     assert len(passwd) == 8
     s_digits = sum(c.isdigit() for c in passwd)
     assert s_digits == 8
-    passwd, score = Password().find(8, spec=ONLY_LETTERS)
+    passwd, score = Password().find(8, spec=USE_LETTERS)
     s_letters = sum(c.isalpha() for c in passwd)
     assert s_letters == 8
     assert score > 5.0 and score < 100.0
