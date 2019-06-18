@@ -43,7 +43,7 @@ Usage example 2:
 >>> from constants import *
 >>> Password().find(8, spec=USE_PUNCTATIONS+USE_DIGITS)
 # or this will return a new safe password and its score:
->>> my_password, my_score = Password().find(8)
+>>> my_password, my_score = Password().find(8, display=False)
  ```
  
  # TEST:
