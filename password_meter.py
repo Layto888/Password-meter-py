@@ -59,8 +59,8 @@ logging.basicConfig(level=logging.WARNING)
 class Password(object):
     """ Rate your password or generate a strong one """
 
-    # test array avoid including string.whitespace when generating random
-    # passwords.
+    # test array avoid including string.whitespace
+    # when generating random passwords.
     str_array = string.ascii_letters
     pnc_array = string.punctuation
     dgt_array = string.digits
@@ -98,7 +98,7 @@ class Password(object):
         # check for spec
         if spec > ALL or spec < USE_LETTERS:
             logger.error(
-                '\nThis specification is not allowed. -> set spec to default.\n')
+                '\nThis specification is not allowed. -> specs are set to default now.\n')
             spec = ALL
 
         best_password = Password()
@@ -120,7 +120,9 @@ class Password(object):
         # show the best pass found
         if display:
             best_password._show_summary()
-            plt.plot(self.tentatives_counter, self.scores_list, label=msg, marker='.')
+            
+        # draw the evolution of password's score
+        plt.plot(self.tentatives_counter, self.scores_list, label=msg, marker='.')
 
         return best_password.password, best_password.score
 
@@ -133,6 +135,18 @@ class Password(object):
         self._show_summary()
         self._suggest_improvement()
         return self.score
+
+    def drawGraph(self):
+        """
+        Represent the evolution password's complexity within a graph.
+        """
+        plt.xlabel('Number of tests')
+        plt.ylabel('Score (Password Strength)')
+        plt.title('Password complexity evolution')
+        plt.suptitle('Evolution of passwords score according to the generated passwords.')
+        plt.legend()
+        plt.grid(True)
+        plt.show()
 
     def _suggest_improvement(self):
         """
