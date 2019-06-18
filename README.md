@@ -60,18 +60,14 @@ Usage example 2:
 >>> Password().find(12, spec=USE_LETTERS+USE_DIGITS, msg='spec=LETTERS + DIGITS')
 >>> Password().find(12, spec=USE_LETTERS+USE_PUNCTATIONS, msg='spec=LETTERS + PUNCTATIONS')
 >>> Password().find(12, spec=USE_DIGITS+USE_PUNCTATIONS, msg='spec=DIGITS + PUNCTATIONS')
->>> # draw graph
->>> plt.xlabel('Number of tests')
->>> plt.ylabel('Score (Password Strength)')
->>> plt.title('Password complexity evolution')
->>> plt.suptitle('Evolution of passwords score according to the generated passwords.')
->>> plt.legend()
->>> plt.grid()
->>> plt.show()
+>>>
+>>> # graph to show passwords safety evolution with a certain number of tries.
+>>> Password().drawGraph()
 ```
  
 TODO: 
- - [x] add unittest file
+ - [x] add pytest file
  - [x] let user choose if he wants include : digits / symbols ..etc.
  - [x] add password strength infos text.
  - [x] add improvement password suggestion in case of weak password. 
+ - [x] add graph representation
