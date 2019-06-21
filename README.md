@@ -29,14 +29,18 @@ improving the password creation process
 - Generating strong passwords.
 
 
+First install the dependencies with pip : 
 
-
+```python
+pip install -r requirements.txt
+```
 Usage example 1:
 ```python
 >>> from password_meter import Password
 >>> password = Password('Azerty22')
 >>> password.rate()
 ```
+
 Usage example 2:
 ```python
 >>> from password_meter import Password
